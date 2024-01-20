@@ -1,7 +1,7 @@
 import css from './Feedbacktext.module.css'
-export const Feedbacktext = ({ text }) => {
+export const Feedbacktext = ({ text, num,test }) => {
     const percent = text === "Positive" ? "%" : "";
     return (
-        <p className={css.text}>{text} : {0}{ percent}</p>
+        <p className={css.text}>{text} :{test} !!!!!{num}{ percent}</p>
     )
 }
