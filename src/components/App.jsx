@@ -1,47 +1,92 @@
 import "modern-normalize";
-// import { Options } from './Options/Options'
 import { Description } from './Description/Description'
 import { Feedback } from "./Feedback/Feedback";
-import css from './Option/Option.module.css'
 import { useState } from 'react';
-// import { Option } from "./Option/Option"
+import { Option } from "./Option/Option"
 
 const feedback={
 	good: 0,
 	neutral: 0,
 	bad: 0
 }
-const Option = ({ name}) => {
-   const [count, setCount]= useState(0);
-    const handleClick = () => {
-        // console.log(Date.now());
-        setCount(count+1);
-    }
-    return (
-        <button onClick={handleClick} className={css.btn}>{name}</button>
-        // <button onClick={()=>handleClick(5)} className={css.btn}>{ name}</button>
-    )
-}
+
 function App() {
-    // const [count, setCount]= useState(0);
-    // const handleClick = () => {
-
-    //   setCount(count + 1);
-
-    // }
+  const [mark, setMark] = useState(feedback);
+  const changeValue1 = () => {
+    setMark({
+      ...mark,
+      good: mark.good+1
+    })
+  }
+    const changeValue2 = () => {
+    setMark({
+      ...mark,
+      neutral: mark.neutral+1
+    })
+    }
+      const changeValue3 = () => {
+    setMark({
+      ...mark,
+      bad: mark.bad+1
+    })
+      }
+  const resetValue = () => {
+     setMark({
+       ...mark,
+       good:0,
+       bad: 0,
+      neutral: 0
+    })
+  }
 
   return (
     <>
       <Description></Description>
            <div>
-            <Option name="Good"></Option>
-        <Option name="Neutral"></Option>
-         <Option name="Bad"></Option>
-                 <Option name="Reset"></Option>
+        <Option name="Good" onUpdate={changeValue1}></Option>
+        <Option name="Neutral" onUpdate={changeValue2}></Option>
+         <Option name="Bad" onUpdate={changeValue3}></Option>
+        <Option name="Reset" onUpdate={resetValue}></Option>
             </div>
-      <Feedback values={feedback} value={count} ></Feedback>
+      <Feedback  values={mark} ></Feedback>
     </>
   )
 }
 
-export default App
+
+
+
+
+// function App(){
+//   const [values, setValues] = useState({
+//     x: 0,
+//     y: 0,
+//   }
+//   );
+	
+// 	const updateX = () => {
+// 			setValues({
+// 			...values,
+// 			x: values.x + 1
+// 		});
+// 	};
+
+// 	const updateY = () => {
+// 		setValues({
+// 			...values,
+// 			y: values.y + 1
+// 		});
+// 	};
+
+//   return (
+//     <div>
+//       <p>
+//         x: {values.x}, y: {values.y}
+//       </p>
+
+//       <button onClick={updateX}>Update x</button>
+//       <button onClick={updateY}>Update y</button>
+//     </div>
+//   );
+// }
+ export default App
