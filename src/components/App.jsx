@@ -60,17 +60,19 @@ function App() {
       window.localStorage.setItem("feedback", JSON.stringify(mark));
 
 }
-, [mark])
+      , [mark])
+  const { good, neutral, bad } = mark;
+      const total = good + neutral + bad;
   return (
     <>
       <Description></Description>
            <div>
         <Option name="Good" onUpdate={changeValue1}></Option>
         <Option name="Neutral" onUpdate={changeValue2}></Option>
-         <Option name="Bad" onUpdate={changeValue3}></Option>
-        <Option name="Reset" onUpdate={resetValue}></Option>
-            </div>
-      <Feedback  values={mark} ></Feedback>
+        <Option name="Bad" onUpdate={changeValue3}></Option>
+        {total>0&&(<Option name="Reset" onUpdate={resetValue}></Option>)}
+      </div>
+      <Feedback  values={mark}></Feedback>
     </>
   )
 }
