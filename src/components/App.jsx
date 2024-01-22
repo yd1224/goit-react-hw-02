@@ -1,7 +1,7 @@
 import "modern-normalize";
 import { Description } from './Description/Description'
 import { Feedback } from "./Feedback/Feedback";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Option } from "./Option/Option"
 
 const feedback={
@@ -9,9 +9,17 @@ const feedback={
 	neutral: 0,
 	bad: 0
 }
+const getInitialFeedback = () => {
+  
+  const values = JSON.parse(window.localStorage.getItem("feedback"));
+  if (values !== null) {
+    return values;
+  }
+  return feedback;
 
+};
 function App() {
-  const [mark, setMark] = useState(feedback);
+  const [mark, setMark] = useState(getInitialFeedback);
   const changeValue1 = () => {
     setMark({
       ...mark,
@@ -38,7 +46,21 @@ function App() {
       neutral: 0
     })
   }
+//   useEffect(() => {
+//        console.log("!!!!!!!! ");
+//    const id= setInterval(() => {
+//         console.log(Date.now());
+//     }, 3000)
+//     return () => {
+//   console.log("clean  up");
+//       clearInterval(id);
+// }
+  // }, [])
+    useEffect(() => {
+      window.localStorage.setItem("feedback", JSON.stringify(mark));
 
+}
+, [mark])
   return (
     <>
       <Description></Description>
