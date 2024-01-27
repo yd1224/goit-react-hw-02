@@ -59,8 +59,7 @@ function App() {
     useEffect(() => {
       window.localStorage.setItem("feedback", JSON.stringify(mark));
 
-}
-      , [mark])
+}, [mark])
   const { good, neutral, bad } = mark;
       const total = good + neutral + bad;
   return (
